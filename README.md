@@ -1,3 +1,1 @@
-If you have docker installed then you can start contemplating on the koans with this command.
-
-./zen.sh
+If you have docker installed then you can contemplate with the command $./zen.sh
