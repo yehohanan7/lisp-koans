@@ -49,9 +49,28 @@
 ;
 ; Your goal is to write the score method.
 
+
+(defun find-set-value (dice)
+  (loop for i in dice
+        when (>= (count i dice) 3)
+          do (return i)))
+
+(defun score-set (set-value)
+  (cond
+    ((null set-value) 0)
+    ((= 1 set-value) 1000)
+    (t (* 1000 set-value))))
+
+
 (defun score (dice)
-  ; You need to write this method
-)
+  (let* ((values dice)
+         (set-value (find-set-value values))
+         (score (score-set set-value)))
+    (when set-value
+      (setf values (remove set-value values :count 3)))
+    (incf score (* (count 1 values) 100))
+    (incf score (* (count 5 values) 50))
+    score))
 
 (define-test test-score-of-an-empty-list-is-zero
     (assert-equal 0 (score nil)))
